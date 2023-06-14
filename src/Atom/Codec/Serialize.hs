@@ -5,7 +5,7 @@
 
 module Atom.Codec.Serialize where
 
-import Atom (Category (..), Content (..), Entry (..), Link (..), Person (..), uriToText, Source(..))
+import Atom (Category (..), Content (..), Entry (..), Link (..), Person (..), Source (..), uriToText)
 import Data.Maybe (catMaybes, fromMaybe)
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as L
