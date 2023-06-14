@@ -57,8 +57,35 @@ expectedEntryXML = "\
         \<atom:updated>2023-06-14T19:18:00+09:00</atom:updated>\
     \</atom:entry>"
 
+minimumEntryFixture :: Entry
+minimumEntryFixture =
+    Entry {
+        author = [],
+        category = [],
+        content = InlineText {text="Test Entry", mimeType=Nothing},
+        contributor = [],
+        id = "entry1",
+        link = [],
+        published = Nothing,
+        rights = Nothing,
+        source = Nothing,
+        summary = Nothing,
+        title = "Test Title",
+        updated = fromJust (iso8601ParseM "2023-06-14T19:18:00+09:00" :: Maybe ZonedTime)
+    }
+
+minimumEntryXML :: L.Text
+minimumEntryXML = "\
+    \<atom:entry>\
+        \<atom:content type=\"text\">Test Entry</atom:content>\
+        \<atom:id>entry1</atom:id>\
+        \<atom:title>Test Title</atom:title>\
+        \<atom:updated>2023-06-14T19:18:00+09:00</atom:updated>\
+    \</atom:entry>"
+
 tests :: TestTree
 tests = testGroup "Atom.Codec.SerializeSpec"
          [
-            testCase "Serialize into XML" $ expectedEntryXML @=? serializeEntry entryFixture
+            testCase "Serialize into XML" $ expectedEntryXML @=? serializeEntry entryFixture,
+            testCase "Serialize minimum entry into XML" $ minimumEntryXML @=? serializeEntry minimumEntryFixture
          ]
